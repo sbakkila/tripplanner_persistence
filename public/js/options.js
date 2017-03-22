@@ -39,4 +39,15 @@ $(function(){
     tripModule.addToCurrent(attraction);
   });
 
+  $.ajax({
+    method: 'GET',
+    url: '/restaurants'
+  })
+  .then(function(data) {
+    console.log(data);
+  })
+  .catch(function(err){
+    console.log(err);
+  });
+
 });
