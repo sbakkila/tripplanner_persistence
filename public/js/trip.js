@@ -86,7 +86,8 @@ var tripModule = (function () {
 
     removeFromCurrent: function (attraction) {
       currentDay.removeAttraction(attraction);
-    }
+    },
+    day: currentDay
 
   };
 

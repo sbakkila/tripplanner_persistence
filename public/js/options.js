@@ -18,9 +18,17 @@ $(function(){
   var $activitySelect = $optionsPanel.find('#activity-choices');
 
   // make all the option tags (second arg of `forEach` is a `this` binding)
-  hotels.forEach(makeOption, $hotelSelect);
-  restaurants.forEach(makeOption, $restaurantSelect);
-  activities.forEach(makeOption, $activitySelect);
+  dataModule.hotelsPromise.then(function(hotels){
+      hotels.forEach(makeOption, $hotelSelect);
+  });
+
+  dataModule.restaurantsPromise.then(function(restaurants){
+      restaurants.forEach(makeOption, $restaurantSelect);
+  });
+
+  dataModule.activitiesPromise.then(function(activities){
+      activities.forEach(makeOption, $activitySelect);
+  });
 
   function makeOption (databaseAttraction) {
     var $option = $('<option></option>') // makes a new option tag
@@ -37,17 +45,16 @@ $(function(){
     // get associated attraction and add it to the current day in the trip
     var attraction = attractionsModule.getByTypeAndId(type, id);
     tripModule.addToCurrent(attraction);
-  });
-
-  $.ajax({
-    method: 'GET',
-    url: '/restaurants'
-  })
-  .then(function(data) {
-    console.log(data);
-  })
-  .catch(function(err){
-    console.log(err);
+    $.ajax({
+      method: 'POST',
+      url: 'api/newActivity',
+      data: {
+        id: id,
+        day: tripModule.day,
+        type: type,
+        attraction: attraction
+      }
+    })
   });
 
 });

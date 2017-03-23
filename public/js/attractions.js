@@ -11,11 +11,17 @@ var attractionsModule = (function () {
 
   // application state
 
-  var enhanced = {
-    hotels: hotels.map(attractionModule.create),
-    restaurants: restaurants.map(attractionModule.create),
-    activities: activities.map(attractionModule.create),
-  };
+  var enhanced;
+   Promise.all([dataModule.hotelsPromise,
+     dataModule.restaurantsPromise,
+     dataModule.activitiesPromise])
+    .then(function(data) {
+      enhanced = {
+        hotels: data[0].map(attractionModule.create),
+        restaurants: data[1].map(attractionModule.create),
+        activities: data[2].map(attractionModule.create)
+      }
+    })
 
   // private helper methods (only available inside the module)
 
