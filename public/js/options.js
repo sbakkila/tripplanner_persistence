@@ -47,7 +47,7 @@ $(function(){
     tripModule.addToCurrent(attraction);
     $.ajax({
       method: 'POST',
-      url: 'api/newActivity',
+      url: 'api/newAttraction',
       data: {
         id: id,
         day: tripModule.day,

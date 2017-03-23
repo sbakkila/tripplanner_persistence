@@ -52,11 +52,15 @@ var dayModule = (function () {
       .text(this.number);
     var self = this;
     this.$button.on('click', function (){
+      console.log('click is working')
       this.blur(); // removes focus box from buttons
       tripModule.switchTo(self);
+
     });
     return this;
   };
+
+
 
   Day.prototype.showButton = function () {
     this.$button.appendTo($dayButtons);

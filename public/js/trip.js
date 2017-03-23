@@ -19,8 +19,7 @@ var tripModule = (function () {
 
   // application state
 
-  var days = [],
-      currentDay;
+  var currentDay;
 
   // jQuery selections
 
@@ -41,21 +40,36 @@ var tripModule = (function () {
   // jQuery event binding
 
   $(function () {
+    console.log($addButton);
     $addButton.on('click', addDay);
     $removeButton.on('click', deleteCurrentDay);
   });
 
   function addDay () {
     if (this && this.blur) this.blur(); // removes focus box from buttons
-    var newDay = dayModule.create({ number: days.length + 1 }); // dayModule
-    days.push(newDay);
-    if (days.length === 1) {
-      currentDay = newDay;
-    }
-    switchTo(newDay);
+    // var newDay = dayModule.create({ number: days.length + 1 }); // dayModule
+    // days.push(newDay);
+    // if (days.length === 1) {
+    //   currentDay = newDay;
+    // }
+    console.log('hit click handler');
+
+    // make the day with an ajax request
+    $.ajax({
+      method: 'POST',
+      url: '/api/days',
+      data: {}
+    })
+    // chain off of this with a response handler
+
+    // switchTo(newDay);
   }
 
   function deleteCurrentDay () {
+    //will use our route to delete a day
+    // will depend on our current day variable to provide the id
+
+
     // prevent deleting last day
     if (days.length < 2 || !currentDay) return;
     // remove from the collection

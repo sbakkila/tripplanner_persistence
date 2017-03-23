@@ -12,5 +12,12 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+// router.post('/newhotel', function(req, res, next) {
+//   Hotel.create(req.body)
+//   .then(function(hotel) {
+//     res.json(hotel)
+//   })
+//   .catch(next);
+// });
 
 module.exports = router;

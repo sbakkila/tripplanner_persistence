@@ -44,7 +44,9 @@ router.delete('/:id', (req, res, next) => {
 
 // create
 router.post('/', (req, res, next) => {
+  console.log('day hit')
   Day.create(Day.findMax() + 1);
+  res.json({})
 })
 
 module.exports = router;
